@@ -257,10 +257,10 @@ int main()
             cin >> val;
 
             bool p = search(val, dir);
-            if (p)
-                cout << "Found " << val << endl;
-            else
-                cout << "Not Found " << val << endl;
+//             if (p)
+//                 cout << "Found " << val << endl;
+//             else
+//                 cout << "Not Found " << val << endl;
         }
         else if (n == 4)
         {

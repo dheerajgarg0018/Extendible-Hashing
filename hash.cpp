@@ -2,22 +2,6 @@
 
 using namespace std;
 
-// class Bucket
-// {
-//     public:
-//         Bucket();
-//         Bucket(int);
-//         virtual ~Bucket();
-//         bool setelement(int, int);
-//         int getelement(int);
-
-//     private:
-//         int capacity;
-//         int* keys;
-//         int index;
-//         int value;
-// };
-
 class Bucket
 {
 public:
@@ -76,7 +60,7 @@ vector<Bucket *> insert(int val, int size, vector<Bucket *> dir)
             return dir;
         }
 
-        gd++; // return it
+        gd++; 
         int n1 = dir.size();
         for (int i = 0; i < n1; i++)
         {
@@ -90,11 +74,6 @@ vector<Bucket *> insert(int val, int size, vector<Bucket *> dir)
         // new bucket
         Bucket *B1 = new Bucket();
         set<int> s0, s1;
-        // int l1= dir[index]->ld;
-        // int k1= 1 << l1;
-        // int i1= index + k1;
-        // k1*=2;
-        // cout << "index=" << index << " i1=" << i1 << " k1=" << k1 << endl;
         string str = DecToBinary(index);
 
         for (auto it = dir[index]->keys.begin(); it != dir[index]->keys.end(); it++)
@@ -112,21 +91,9 @@ vector<Bucket *> insert(int val, int size, vector<Bucket *> dir)
             {
                 s0.insert(f);
             }
-
-            // if(f%k1 != index) {
-            //     cout << f << endl;
-            //     s1.insert(f);
-            //     // B1->keys.insert(f);
-            //     // dir[index]->keys.erase(f);
-            //     // it--;
-            // }
         }
-        // cout << B1->keys.size() << endl;
-        // for(auto it= s1.begin(); it!=s1.end(); it++)
-        //     dir[index]->keys.erase(*it);
 
         B1->keys = s1;
-        // cout << B1->keys.size() << endl;
         dir[index]->ld++;
         B1->ld = dir[index]->ld;
 
@@ -144,13 +111,6 @@ vector<Bucket *> insert(int val, int size, vector<Bucket *> dir)
             dir[i1] = B1;
             dir[index]->keys = s0;
         }
-
-        // auto it= s1.begin();
-        // int i1= *it%k1;
-        // it= s0.begin();
-        // int i2= *it%k1;
-        // dir[i1]=B1;
-        // dir[i2]->keys=s0;
 
         for (int a = k1; i1 + a < k; a += k1)
         {
@@ -212,11 +172,6 @@ vector<Bucket *> deleteKey(int val, vector<Bucket *> dir)
         int i1 = index ^ k1;
         if (dir[index]->ld != dir[i1]->ld)
             return dir;
-        // int i1 = val % k1;
-        // if (i1 == index)
-        // {
-        //     i1 = index + k / 2;
-        // }
 
         Bucket *B1 = dir[index];
         dir[i1]->ld = l1;
@@ -258,15 +213,15 @@ vector<Bucket *> deleteKey(int val, vector<Bucket *> dir)
 
 void print(vector<Bucket *> dir)
 {
-    cout << dir.size() << endl;
+//     cout << dir.size() << endl;
     cout << gd << endl;
     cout << Buckets.size() << endl;
     for (int i = 0; i < Buckets.size(); i++)
     {
         cout << Buckets[i]->keys.size() << " " << Buckets[i]->ld << endl;
-        for (auto it = Buckets[i]->keys.begin(); it != Buckets[i]->keys.end(); it++)
-            cout << *it << " ";
-        cout << endl;
+//         for (auto it = Buckets[i]->keys.begin(); it != Buckets[i]->keys.end(); it++)
+//             cout << *it << " ";
+//         cout << endl;
     }
 
     return;
@@ -328,26 +283,3 @@ int main()
 
     return 0;
 }
-
-// Bucket::Bucket()
-// {
-//     capacity=0;
-//     keys=NULL;
-// }
-
-// Bucket::Bucket(int bucketSize)
-// {
-//     capacity=bucketSize;
-//     keys = new int[capacity];
-// }
-
-// bool Bucket::setelement(int index, int value)
-// {
-//     keys[index] = value;
-//     return true;
-// }
-
-// int Bucket::getelement(int index)
-// {
-//     return keys[index];
-// }
